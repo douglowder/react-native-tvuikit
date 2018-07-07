@@ -1,5 +1,5 @@
-import TVPosterView from 'TVPosterView';
+import TVPosterView from './TVPosterView';
 
-export default {
+module.exports =  {
   TVPosterView
 };

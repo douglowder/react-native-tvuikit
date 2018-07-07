@@ -1,29 +1,21 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- * @format
- * @flow
- */
-
 'use strict';
 
-const Platform = require('Platform');
-const React = require('React');
-const ReactNative = require('ReactNative');
+const React = require('react');
+const ReactNative = require('react-native');
+const NativeMethodsMixin = ReactNative.NativeMethodsMixin;
+const Platform = ReactNative.Platform;
 const PropTypes = require('prop-types');
-const StyleSheet = require('StyleSheet');
-const ViewPropTypes = require('ViewPropTypes');
+const StyleSheet = ReactNative.StyleSheet;
+const ViewPropTypes = ReactNative.ViewPropTypes;
+const View = ReactNative.View;
 
 const createReactClass = require('create-react-class');
-const requireNativeComponent = require('requireNativeComponent');
+const requireNativeComponent = ReactNative.requireNativeComponent;
 
-import type {ViewProps} from 'ViewPropTypes';
+const ViewProps = ViewPropTypes.ViewProps;
 
 const tvPosterViewSupported = Platform.isTVOS && Platform.Version.substr(0,2) === '12';
-const RCTTVPosterView = tvPosterViewSupported ? ReactNative.NativeModules.RCTTVPosterView : null;
+const RCTTVPosterView = tvPosterViewSupported ? requireNativeComponent('RCTTVPosterView', 'TVPosterView') : null;
 
 type DefaultProps = {
   title: string,
@@ -73,11 +65,13 @@ const TVPosterView = createReactClass({
   render: function() {
     if (tvPosterViewSupported) {
       return (
+        <View>
         <RCTTVPosterView
           {...this.props}
           ref={TVPOSTERVIEW_REFERENCE}
           style={[styles.tvposterview, this.props.style]}
         />
+        </View>
       );
     } else {
       return (
@@ -98,6 +92,7 @@ const styles = StyleSheet.create({
   },
 });
 
-module.exports = ((TVPosterView: any): Class<
-  ReactNative.NativeComponent<Props>,
->);
+// module.exports = ((TVPosterView: any): Class<
+//   ReactNative.NativeComponent<Props>,
+// >);
+module.exports = TVPosterView;
