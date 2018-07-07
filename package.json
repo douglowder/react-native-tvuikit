@@ -1,0 +1,20 @@
+{
+  "name": "react-native-tvuikit",
+  "version": "0.0.1",
+  "description": "React Native module for creating TVUIKit views on tvOS 12",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dlowder-salesforce/react-native-tvuikit.git"
+  },
+  "keywords": [
+    "react-native",
+    "tvOS",
+    "Apple TV"
+  ],
+  "author": "Doug Lowder (dlowder@salesforce.com)",
+  "license": "MIT",
+  "peerDependencies": {
+    "react-native": ">=0.56.0"
+  }
+}
