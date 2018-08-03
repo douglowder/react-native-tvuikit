@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 API_AVAILABLE(tvos(12.0))
 @interface RCTTVCardView : TVCardView
 
+@property(nonatomic, nullable, copy) NSString *title;
+@property(nonatomic, nullable, copy) NSString *subtitle;
 @property(nonatomic, nullable, copy) NSString *imageURL;
 @property(nonatomic, nullable, strong) UIImageView *imageView;
 
