@@ -14,8 +14,8 @@ const requireNativeComponent = ReactNative.requireNativeComponent;
 
 const ViewProps = ViewPropTypes.ViewProps;
 
-const tvPosterViewSupported = Platform.isTVOS && Platform.Version.substr(0,2) === '12';
-const RCTTVPosterView = tvPosterViewSupported ? requireNativeComponent('RCTTVPosterView', 'TVPosterView') : null;
+const tvCardViewSupported = Platform.isTVOS && Platform.Version.substr(0,2) === '12';
+const RCTTVCardView = tvCardViewSupported ? requireNativeComponent('RCTTVCardView', 'TVCardView') : null;
 
 type DefaultProps = {
   title: string,
@@ -29,12 +29,12 @@ type Props = $ReadOnly<{|
   imageURL?: ?string,
 |}>;
 
-const TVPOSTERVIEW_REFERENCE = 'tvposterview';
+const TVCARDVIEW_REFERENCE = 'tvcardview';
 
 type Event = Object;
 
-const TVPosterView = createReactClass({
-  displayName: 'TVPosterView',
+const TVCardView = createReactClass({
+  displayName: 'TVCardView',
   mixins: [NativeMethodsMixin],
 
   propTypes: {
@@ -63,18 +63,18 @@ const TVPosterView = createReactClass({
   },
 
   render: function() {
-    if (tvPosterViewSupported) {
+    if (tvCardViewSupported) {
       return (
-        <RCTTVPosterView
+        <RCTTVCardView
           {...this.props}
-          ref={TVPOSTERVIEW_REFERENCE}
+          ref={TVCARDVIEW_REFERENCE}
         />
       );
     } else {
       return (
         <View>
           <Text>
-            TVPosterView is not supported on this platform.
+            TVCardView is not supported on this platform.
           </Text>
         </View>
       );
@@ -82,4 +82,4 @@ const TVPosterView = createReactClass({
   },
 });
 
-module.exports = TVPosterView;
+module.exports = TVCardView;
