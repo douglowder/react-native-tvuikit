@@ -14,6 +14,7 @@ API_AVAILABLE(tvos(12.0))
 @interface RCTTVPosterView : TVPosterView
 
 @property(nonatomic, nullable, copy) NSString *imageURL;
+@property(nonatomic, nullable, copy) NSString *imageURI;
 
 @end
 

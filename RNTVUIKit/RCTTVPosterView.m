@@ -18,4 +18,16 @@
     }
 }
 
+-(void)setImageURI:(NSString *)imageURI {
+    _imageURI = [imageURI copy];
+    if (_imageURI) {
+        id path = _imageURI;
+        NSURL *url = [NSURL URLWithString:path];
+        NSData *data = [NSData dataWithContentsOfURL:url];
+        UIImage *img = [[UIImage alloc] initWithData:data];
+        self.imageView.image = img;
+        [self.contentView addSubview:self.imageView];
+    }
+}
+
 @end
