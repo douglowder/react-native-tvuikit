@@ -14,19 +14,22 @@ const requireNativeComponent = ReactNative.requireNativeComponent;
 
 const ViewProps = ViewPropTypes.ViewProps;
 
-const tvPosterViewSupported = Platform.isTVOS && Platform.Version.substr(0,2) === '12';
-const RCTTVPosterView = tvPosterViewSupported ? requireNativeComponent('RCTTVPosterView', 'TVPosterView') : null;
+const tvPosterViewSupported =
+  Platform.isTVOS && Platform.Version.substr(0, 2) === '12';
+const RCTTVPosterView = tvPosterViewSupported
+  ? requireNativeComponent('RCTTVPosterView', 'TVPosterView')
+  : null;
 
 type DefaultProps = {
   title: string,
-  subtitle: string,
+  subtitle: string
 };
 
 type Props = $ReadOnly<{|
   ...ViewProps,
   title: string,
   subtitle?: ?string,
-  imageURL?: ?string,
+  imageURL?: ?string
 |}>;
 
 const TVPOSTERVIEW_REFERENCE = 'tvposterview';
@@ -50,36 +53,33 @@ const TVPosterView = createReactClass({
     subtitle: PropTypes.string,
 
     /**
-     * Image URL
+     * Image URL (local image)
      */
     imageURL: PropTypes.string,
 
+    /**
+     * Image URI (remote image)
+     */
+    imageURI: PropTypes.string
   },
 
   getDefaultProps: function(): DefaultProps {
     return {
-      title: '',
+      title: ''
     };
   },
 
   render: function() {
     if (tvPosterViewSupported) {
-      return (
-        <RCTTVPosterView
-          {...this.props}
-          ref={TVPOSTERVIEW_REFERENCE}
-        />
-      );
+      return <RCTTVPosterView {...this.props} ref={TVPOSTERVIEW_REFERENCE} />;
     } else {
       return (
         <View>
-          <Text>
-            TVPosterView is not supported on this platform.
-          </Text>
+          <Text>TVPosterView is not supported on this platform.</Text>
         </View>
       );
     }
-  },
+  }
 });
 
 module.exports = TVPosterView;
