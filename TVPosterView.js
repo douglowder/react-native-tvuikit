@@ -29,7 +29,8 @@ type Props = $ReadOnly<{|
   ...ViewProps,
   title: string,
   subtitle?: ?string,
-  imageURL?: ?string
+  imageURL?: ?string,
+  imageURI?: ?string
 |}>;
 
 const TVPOSTERVIEW_REFERENCE = 'tvposterview';
