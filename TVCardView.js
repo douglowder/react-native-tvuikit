@@ -14,12 +14,15 @@ const requireNativeComponent = ReactNative.requireNativeComponent;
 
 const ViewProps = ViewPropTypes.ViewProps;
 
-const tvCardViewSupported = Platform.isTVOS && Platform.Version.substr(0,2) === '12';
-const RCTTVCardView = tvCardViewSupported ? requireNativeComponent('RCTTVCardView', 'TVCardView') : null;
+const tvCardViewSupported =
+  Platform.isTVOS && Platform.Version.substr(0, 2) === '12';
+const RCTTVCardView = tvCardViewSupported
+  ? requireNativeComponent('RCTTVCardView', 'TVCardView')
+  : null;
 
 type DefaultProps = {
   title: string,
-  subtitle: string,
+  subtitle: string
 };
 
 type Props = $ReadOnly<{|
@@ -27,6 +30,7 @@ type Props = $ReadOnly<{|
   title: string,
   subtitle?: ?string,
   imageURL?: ?string,
+  imageURI?: ?string
 |}>;
 
 const TVCARDVIEW_REFERENCE = 'tvcardview';
@@ -50,36 +54,33 @@ const TVCardView = createReactClass({
     subtitle: PropTypes.string,
 
     /**
-     * Image URL
+     * Image URL (from local)
      */
     imageURL: PropTypes.string,
 
+    /**
+     * Image URL (from remote)
+     */
+    imageURI: PropTypes.string
   },
 
   getDefaultProps: function(): DefaultProps {
     return {
-      title: '',
+      title: ''
     };
   },
 
   render: function() {
     if (tvCardViewSupported) {
-      return (
-        <RCTTVCardView
-          {...this.props}
-          ref={TVCARDVIEW_REFERENCE}
-        />
-      );
+      return <RCTTVCardView {...this.props} ref={TVCARDVIEW_REFERENCE} />;
     } else {
       return (
         <View>
-          <Text>
-            TVCardView is not supported on this platform.
-          </Text>
+          <Text>TVCardView is not supported on this platform.</Text>
         </View>
       );
     }
-  },
+  }
 });
 
 module.exports = TVCardView;
